@@ -1,0 +1,1 @@
+ALTER TABLE "students" RENAME COLUMN "group_number" TO "one_time_score";
