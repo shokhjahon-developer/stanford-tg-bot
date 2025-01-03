@@ -1,6 +1,9 @@
 import { title } from "process";
 import { sendCourseRegistration } from "../services/bot.service";
-import { courseInfoEn } from "../services/commands.service";
+import {
+  courseInfoEn,
+  createMainMenuKeyboard,
+} from "../services/commands.service";
 import type { MyContext } from "../services/context.service";
 import type { HearTypeFunction } from "./types";
 
@@ -45,6 +48,7 @@ export const enrollCourses: HearTypeFunction = () => {
             keyboard: [
               ["🇬🇧 Ingliz tili 🇬🇧", "🇷🇺 Rus tili 🇷🇺"],
               ["🇰🇷 Koreys tili 🇰🇷"],
+              ["Asosiy Menuga qaytish 📋"],
             ],
             resize_keyboard: true,
             one_time_keyboard: true,
@@ -76,6 +80,17 @@ export const enrollRu: HearTypeFunction = () => {
     title: "🇷🇺 Rus tili 🇷🇺",
     fn: async (ctx: MyContext) => {
       await sendCourseRegistration(ctx, "Rus tili 🇷🇺");
+    },
+  };
+};
+
+export const mainMenu: HearTypeFunction = () => {
+  return {
+    title: "Asosiy Menuga qaytish 📋",
+    fn: async (ctx: MyContext) => {
+      return await ctx.reply("Asosiy Menu 📋", {
+        reply_markup: createMainMenuKeyboard(),
+      });
     },
   };
 };
