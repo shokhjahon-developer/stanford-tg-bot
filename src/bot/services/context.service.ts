@@ -8,7 +8,7 @@ interface SessionData {
   organizationId: string;
   isSendingAd: boolean;
   isFeedback: boolean;
-  date: string;
+  isBotFeedback: boolean;
 }
 
 export type MyContext = Context &
