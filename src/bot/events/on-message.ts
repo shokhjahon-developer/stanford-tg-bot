@@ -65,16 +65,16 @@ export const onMessage = async (ctx: MyContext) => {
     }
     await ctx.api.sendMessage(
       process.env.BOT_ADMIN_ID!,
-      `<b>📩 Botga yangi habar keldi:</b>\n\n ${message.text}\n\n\n`,
-      // `name: ${ctx.from!.first_name}\n` +
-      // `username: ${ctx.from?.username}\n` +
-      // `chatId: ${ctx.chatId}`,
+      `<b>📩 Botga yangi habar keldi:</b>\n\n ${message.text}\n\n\n` +
+        `name: ${ctx.from!.first_name}\n` +
+        `username: ${ctx.from?.username}\n` +
+        `chatId: ${ctx.chatId}`,
       {
         parse_mode: "HTML",
       }
     );
 
-    await ctx.reply("✅ Arizangiz adminga yetkazildi, Raxmat! 😊");
+    await ctx.reply("✅ Arizangiz yetkazildi, Raxmat! 😊");
     return (ctx.session.isBotFeedback = false);
   }
 };

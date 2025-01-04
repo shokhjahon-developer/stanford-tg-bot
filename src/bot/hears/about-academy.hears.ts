@@ -91,7 +91,7 @@ export const offerToBot: HearTypeFunction = () => {
         "⚠️ <b>Botda muammo yoki taklifingiz bormi?</b>\n\n" +
           "<b>Buni bizga aytishdan erinmang, sizning fikringiz biz uchun muhim ‼️</b>\n\n" +
           "📞 <b>Telefon:</b> <a href='tel:+998931203081'>+998931203081</a>\n" +
-          "💬 <b>Telegram:</b> <a href='https://t.me/shokhjahon_s'>@shokhjahon_s</a>\n\n" +
+          "💬 <b>Telegram:</b> <a href='https://t.me/shokhjahon_s'>@shokhjahon_s</a>\n" +
           "📝 <b>Anonim yozish:</b> <i>Bu yerda o'z fikringizni yozib qoldirishingiz mumkin:</i>\n\n" +
           "📩 <i>Fikr-mulohazalaringizni yuborish uchun shunchaki xabar yuboring. Sizning ismingiz ko'rinmaydi!</i> 👇💡\n\n" +
           "📞 <b>Yoki yuqoridagi ma'lumotlar orqali biz bilan bog'lanishingiz mumkin.</b>",

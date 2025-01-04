@@ -121,7 +121,7 @@ export const callbackQuery = async (ctx: MyContext) => {
       "📞 <b>Biz bilan bog'laning!</b> 🌟\n\n" +
         "💼 <i>Savollaringiz bormi? Biz har doim yordamga tayyormiz!</i> 🤝\n\n" +
         "☎️ <b>Telefon orqali bog'lanish:</b>\n" +
-        "📲 <a href='tel:+998931203081'><b>+998931203081</b></a>\n\n" +
+        "📲 <a href='tel:+998932453539'><b>+998932453539</b></a>\n\n" +
         "💬 <b>Telegram orqali yozing:</b>\n" +
         "✈️ <a href='https://t.me/An_Nur_edu_admin'><b>@An_Nur_edu_admin</b></a>\n\n" +
         "📌 <i>Agar bog'lana olmasangiz, iltimos birozdan so'ng qayta urinib ko'ring yoki Telegram orqali yozing!</i> ✉️",
@@ -133,7 +133,7 @@ export const callbackQuery = async (ctx: MyContext) => {
   if (data === "bot_feedback") {
     await ctx.deleteMessage();
     await ctx.reply(
-      "<b>Bu xatolikni befarq qoldirmang!</b>\n\nBizga xabar bering:\n📞 <i>Telefon:</i> <a href='tel:+998931203081'>+998931203081</a>",
+      "<b>Bu xatolikni befarq qoldirmang!</b>\n\nBizga xabar bering:\n📞 <i>Telefon:</i> <a href='tel:+998932453539'>+998932453539</a>",
       { parse_mode: "HTML" }
     );
   }

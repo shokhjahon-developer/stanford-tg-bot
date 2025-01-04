@@ -43,8 +43,8 @@ bot.use(
     onLimitExceeded: async (ctx) => {
       await ctx.reply("Don't you dare try to outsmart me, you BITCH❗️");
 
-      const cooldownTime = 5 * 1000;
-      // const cooldownTime = 5 * 60 * 1000;
+      // const cooldownTime = 5 * 1000;
+      const cooldownTime = 5 * 60 * 1000;
 
       await redis.set(`cooldown:${ctx.from?.id}`, "on", "PX", cooldownTime);
       await redis.set(`cooldown:${ctx.from?.id}`, "on", "PX", cooldownTime);

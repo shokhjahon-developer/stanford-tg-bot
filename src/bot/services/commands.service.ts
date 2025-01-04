@@ -37,10 +37,10 @@ Stanford Academy siz uchun <b>zamonaviy, qiziqarli va samarali</b> Rus tili kurs
 - 🧑‍🏫 <b>Professional o'qituvchilar</b> bilan har bir darsdan zavqlaning.
 - 📚 Rus tili gramatikasi va <b>boy so'z boyligi</b>ni o'rganing.
 - 💬 <b>Speaking Club</b>da o'zingizni erkin ifoda qiling va ko'nikmalaringizni mustahkamlang.
-- 📆 <b>Quvlay jadval:</b> Darslar ish kunlari va dam olish kunlariga moslashadi.
+- 📆 <b>Qulay jadval:</b> Darslar ish kunlari va dam olish kunlariga moslashadi.
 - 📈 Kurs yakunida <b>yuqori sertifikat</b> bilan muvaffaqiyatlaringizni tasdiqlang.
 
-💼 Rus tilida so'zlashib, <b>yangi ish imkoniyatlari</b> va <b>olimiy yutuqlar</b>ga erishing! 
+💼 Rus tilida so'zlashib, <b>yangi ish imkoniyatlari</b> va <b>katta yutuqlar</b>ga erishing! 
 
 Stanford Academy - kelajakka o'zgarish qiling! 🌟
 `;
