@@ -164,7 +164,7 @@ export async function sendLeaderboard(ctx: MyContext, page = 1) {
     .from(Student)
     .orderBy(desc(Student.score))
     .offset(offset)
-    .where(gte(Student.score, 0))
+    .where(gte(Student.score, 1))
     .limit(ITEMS_PER_PAGE);
 
   // Get the total count of students with scores
