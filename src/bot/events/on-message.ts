@@ -1,7 +1,10 @@
+import { eq } from "drizzle-orm";
 import { adminId2, adminId } from "../../app";
 import { db } from "../../database";
 import { Student } from "../../database/schemas";
 import type { MyContext } from "../services/context.service";
+import { createMainMenuKeyboard } from "../services/commands.service";
+import type { text } from "stream/consumers";
 
 export const onMessage = async (ctx: MyContext) => {
   const message = ctx.message!;
@@ -76,5 +79,123 @@ export const onMessage = async (ctx: MyContext) => {
 
     await ctx.reply("✅ Arizangiz yetkazildi, Raxmat! 😊");
     return (ctx.session.isBotFeedback = false);
+  } else if (ctx.session.isPaymentMadeProcess) {
+    if (message.photo) {
+      const student = await db
+        .select()
+        .from(Student)
+        .where(eq(Student.chatId, `${ctx.from?.id}`));
+
+      await ctx.api.sendPhoto(adminId2, message.photo[2].file_id, {
+        caption:
+          `📸 <b>Yangi to'lov keldi:</b>\n\n` +
+          `O'quvchi to'liq ma'lumotlari:\n\n` +
+          `📝 <b>Ism:</b> ${student[0].firstName}\n` +
+          `📝 <b>Familya:</b> ${student[0].lastName}\n` +
+          `📝<b>Gruh raqami:</b> +${student[0].groupNumber}\n` +
+          `📱 <b>Telefon raqami:</b> +${student[0].phoneNumber}\n` +
+          `💬 <b>Telegram username:</b> @${student[0]?.username} \n\n` +
+          `\n🚀 <i>To'lovni tasdiqlash yoki bekor qilish uchun quyidagi tugmalardan birini bosing:</i>
+        `,
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "✅ Tasdiqlash",
+                callback_data: `confirm_payment: ${ctx.from?.id}`,
+              },
+              {
+                text: "❌ Bekor qilish",
+                callback_data: `cancel_payment: ${ctx.from?.id}`,
+              },
+            ],
+          ],
+        },
+      });
+
+      await ctx.api.sendPhoto(adminId, message.photo[2].file_id, {
+        caption:
+          `📸 <b>Yangi to'lov keldi:</b>\n\n` +
+          `O'quvchi to'liq ma'lumotlari:\n\n` +
+          `📝 <b>Ism:</b> ${student[0].firstName}\n` +
+          `📝 <b>Familya:</b> ${student[0].lastName}\n` +
+          `📝<b>Gruh raqami:</b> ${student[0].groupNumber}\n` +
+          `📱 <b>Telefon raqami:</b> +${student[0].phoneNumber}\n` +
+          `💬 <b>Telegram username:</b> ${student[0].username}\n\n` +
+          `🚀 <i>To'lovni tasdiqlash yoki bekor qilish uchun quyidagi tugmalardan birini bosing:</i>
+        `,
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "✅ Tasdiqlash",
+                callback_data: `confirm_payment: ${ctx.from?.id}`,
+              },
+              {
+                text: "❌ Bekor qilish",
+                callback_data: `cancel_payment ${ctx.from?.id}`,
+              },
+            ],
+          ],
+        },
+      });
+      ctx.session.isPaymentMadeProcess = false;
+
+      return await ctx.reply(
+        "To'lov tasdiqlash uchun adminga yuborildi! ✅ \n\n Tez orada to'lovingiz haqida javob keladi! 🚀",
+        {
+          reply_markup: createMainMenuKeyboard(),
+        }
+      );
+    }
+    return await ctx.reply("Iltimos chek rasmini yuboring! 📸");
+  } else if (ctx.session.hasGroupNumber) {
+    if (message.text) {
+      const isNumber = /^\d+$/.test(message.text);
+
+      if (!isNumber) {
+        return await ctx.reply("Iltimos, faqat raqam kiriting. Masalan: 12");
+      }
+      await db
+        .update(Student)
+        .set({ groupNumber: message.text })
+        .where(eq(Student.chatId, `${ctx.chat?.id}`));
+      ctx.session.hasGroupNumber = true;
+      return await ctx.reply(
+        "💰 <b>O'quv kursiga to'lov</b>\n\n" +
+          "📋 <i>To'lovni amalga oshirish uchun quyidagi raqamga pul o'tkazing:</i>\n\n" +
+          "💳 <b>Karta raqami:\n</b> <pre>9860 1701 0711 3772</pre>\n\n" +
+          "👤 <b>Ism Familya:</b> <i>Nurmuxammad Isroilov</i>\n\n" +
+          "📸 <i>Chekni screenshot qilishni unutmang, bu to'lovni tasdiqlash uchun kerak bo'ladi!</i>\n\n" +
+          "✅ <b>To'lovni amalga oshirgandan so'ng, \"To'lov qildim ✅\" tugmasini bosing!</b>",
+        {
+          parse_mode: "HTML",
+          reply_markup: {
+            keyboard: [
+              [
+                {
+                  text: "💳 To'lov qildim ✅",
+                },
+              ],
+              [
+                {
+                  text: "Asosiy Menuga qaytish 📋",
+                },
+              ],
+            ],
+          },
+        }
+      );
+    }
+    return await ctx.reply(
+      "Iltimos, o'quv kursiga to'lov qilishdan oldin guruh raqamingizni kiriting. 📝 \n(Masalan: 12)",
+      {
+        reply_markup: {
+          remove_keyboard: true,
+        },
+      }
+    );
   }
 };

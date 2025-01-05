@@ -7,6 +7,8 @@ import { createMainMenuKeyboard } from "./commands.service";
 import { InlineKeyboard } from "grammy";
 import { db } from "../../database";
 import { Student } from "../../database/schemas";
+import type { HearTypeFunction } from "../hears/types";
+import { parse } from "path";
 
 export type MyConversation = Conversation<MyContext>;
 

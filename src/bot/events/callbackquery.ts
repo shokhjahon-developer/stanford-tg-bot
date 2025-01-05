@@ -6,6 +6,8 @@ import {
   courseInfoRu,
   courseInfoKo,
   courseInfoEn,
+  createMainMenuKeyboard,
+  createAdminMainMenuKeyboard,
 } from "../services/commands.service";
 import type { MyContext } from "../services/context.service";
 
@@ -18,7 +20,53 @@ export const callbackQuery = async (ctx: MyContext) => {
     const page = parseInt(data.split("_").pop() || "0", 10);
     await sendLeaderboard(ctx, page);
   }
+  if (data.startsWith("confirm_payment")) {
+    let user = data.split(":")[1].trim();
+    console.log("user", user, "user");
 
+    await ctx.deleteMessage();
+    await ctx.api.sendMessage(
+      user,
+      "Sizning to'lovingiz qabul qilindi! ✅ \nTo'lovni amalga oshirganingiz uchun raxmat!😊",
+      {
+        reply_markup: createMainMenuKeyboard(),
+      }
+    );
+    return await ctx.reply(
+      "O'quvchiga to'lovi qabul qilingani haqida xabar yuborildi! ✅",
+      {
+        reply_markup: createAdminMainMenuKeyboard(),
+      }
+    );
+  }
+  if (data.startsWith("cancel_payment")) {
+    let user = data.split(" ")[1].trim();
+    console.log("user", user, "user");
+
+    await ctx.deleteMessage();
+    await ctx.api.sendMessage(
+      user,
+      "Kechirasiz, sizning to'lovingiz qabul qilinmadi! ❌ \nQayta urinib ko'ring yoki biz bilan bog'laning!",
+      {
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "📞 Biz bilan bog'lanish",
+                callback_data: "call_support",
+              },
+            ],
+          ],
+        },
+      }
+    );
+    return await ctx.reply(
+      "O'quvchiga to'lovi qabul qilinmaganini xabar yuborildi! ❌",
+      {
+        reply_markup: createAdminMainMenuKeyboard(),
+      }
+    );
+  }
   if (data === "academy_photos") {
     await ctx.deleteMessage();
     const sentMsg = await ctx.reply("Iltimos biroz kuting...⌛️");

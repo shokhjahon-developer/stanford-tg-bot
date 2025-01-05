@@ -43,6 +43,20 @@
       "when": 1735587330081,
       "tag": "0005_wooden_lucky_pierre",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1736086487886,
+      "tag": "0006_loose_medusa",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1736087377341,
+      "tag": "0007_flat_spot",
+      "breakpoints": true
     }
   ]
 }

@@ -18,6 +18,7 @@ export const Student = pgTable(
     phoneNumber: varchar("phone_number"),
     firstName: varchar("first_name"),
     lastName: varchar("last_name"),
+    groupNumber: varchar("group_number"),
     tg_first_name: varchar("tg_first_name"),
     one_time_score: integer("one_time_score"),
     score: integer("score"),

@@ -9,6 +9,9 @@ interface SessionData {
   isSendingAd: boolean;
   isFeedback: boolean;
   isBotFeedback: boolean;
+  isPaymentMadeProcess: boolean;
+  payingPerson: string;
+  hasGroupNumber: boolean;
 }
 
 export type MyContext = Context &

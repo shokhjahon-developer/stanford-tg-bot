@@ -13,7 +13,9 @@ export const createMainMenuKeyboard = () => {
     .text("📞 Biz bilan bog'lanish 📲")
     .row()
     .text("📩  Shikoyat  |  Talab  |  Taklif  🗣️")
-    .text("🛠️ Botdagi Muammo yoki Taklif 💡");
+    .text("🛠️ Botdagi Muammo yoki Taklif 💡")
+    .row()
+    .text("💳 O'quv kursiga to'lov qilish 💼");
 };
 
 export const createAdminMainMenuKeyboard = () => {

@@ -41,10 +41,10 @@ bot.use(
     limit: 3,
     storageClient: redis,
     onLimitExceeded: async (ctx) => {
-      await ctx.reply("Don't you dare try to outsmart me, you BITCH❗️");
+      await ctx.reply("You sent too many messages! Slow down !!!");
 
       // const cooldownTime = 5 * 1000;
-      const cooldownTime = 5 * 60 * 1000;
+      const cooldownTime = 60 * 60 * 1000;
 
       await redis.set(`cooldown:${ctx.from?.id}`, "on", "PX", cooldownTime);
       await redis.set(`cooldown:${ctx.from?.id}`, "on", "PX", cooldownTime);
@@ -62,9 +62,7 @@ bot.use(async (ctx, next) => {
   const cooldownStatus = await redis.get(cooldownKey);
 
   if (cooldownStatus === "on") {
-    return ctx.reply(
-      "You are on cooldown for trying slow down the server with your LITTLE mind!!!"
-    );
+    return ctx.reply("You are on cooldown !!!");
   }
 
   await next();

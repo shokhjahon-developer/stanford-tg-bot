@@ -2,11 +2,9 @@ import { eq } from "drizzle-orm";
 import { activeTimers, bot, userScores } from "../../app";
 import { db } from "../../database";
 import { Question, Student } from "../../database/schemas";
-import { sendLeaderboard } from "../services/bot.service";
+
 import { sendQuestionWithTimer } from "../services/bot.solve-quizz.service";
 import type { MyContext } from "../services/context.service";
-import type { url } from "inspector";
-import type { text } from "stream/consumers";
 
 export const answerCallbackQuery = async (
   ctx: MyContext,
