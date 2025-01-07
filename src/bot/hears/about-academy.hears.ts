@@ -80,7 +80,7 @@ export const offer: HearTypeFunction = () => {
       return (ctx.session.isFeedback = true);
     },
   };
-};
+}; 
 
 export const offerToBot: HearTypeFunction = () => {
   return {

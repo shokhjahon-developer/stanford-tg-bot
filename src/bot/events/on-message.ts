@@ -4,7 +4,7 @@ import { db } from "../../database";
 import { Student } from "../../database/schemas";
 import type { MyContext } from "../services/context.service";
 import { createMainMenuKeyboard } from "../services/commands.service";
-import type { text } from "stream/consumers";
+import type { session } from "grammy";
 
 export const onMessage = async (ctx: MyContext) => {
   const message = ctx.message!;
@@ -36,10 +36,9 @@ export const onMessage = async (ctx: MyContext) => {
     return await ctx.reply("Xabar hamma foydalanuvchiga yuborildi! ✅");
   } else if (ctx.session.isFeedback) {
     if (!message.text) {
-      await ctx.reply(
+      return await ctx.reply(
         "Photo, Video, Audio and Documents are not supported yet! \n\n If you need to send it pls contact the developer: @shokhjahon_s"
       );
-      return (ctx.session.isFeedback = false);
     }
     await ctx.api.sendMessage(
       adminId2,
@@ -48,6 +47,16 @@ export const onMessage = async (ctx: MyContext) => {
         `username: ${ctx.from!.username}`,
       {
         parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "Javob yozish",
+                callback_data: `reply_feedback: ${ctx.from?.id}`,
+              },
+            ],
+          ],
+        },
       }
     );
     await ctx.api.sendMessage(
@@ -55,9 +64,21 @@ export const onMessage = async (ctx: MyContext) => {
       `<b>📩 Sizga yangi habar keldi:</b>\n\n ${message.text}`,
       {
         parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "Javob yozish",
+                callback_data: `reply_feedback: ${ctx.from?.id}`,
+              },
+            ],
+          ],
+        },
       }
     );
-    await ctx.reply("✅ Arizangiz adminga yetkazildi, Raxmat! 😊");
+    await ctx.reply(
+      "✅ Arizangiz adminga yetkazildi. \nTez orada sizga bot orqali javob yozishadi.  Raxmat! 😊"
+    );
     return (ctx.session.isFeedback = false);
   } else if (ctx.session.isBotFeedback) {
     if (!message.text) {
@@ -197,5 +218,38 @@ export const onMessage = async (ctx: MyContext) => {
         },
       }
     );
+  } else if (ctx.session.replyingToFeedback) {
+    const userId = ctx.session.replyingToFeedback;
+
+    if (userId === `${ctx.from!.id}`) {
+      await ctx.reply("❌ Siz o'zingizga javob yuborolmaysiz.");
+      ctx.session.replyingToFeedback = null;
+      return;
+    }
+
+    const text = `✉️ <b>Sizga javob keldi:</b>\n\n${message.text}`;
+    try {
+      await ctx.api.sendMessage(userId, text, {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "🔄 Javob berish",
+                callback_data: `reply_feedback:${ctx.from!.id}`,
+              },
+            ],
+          ],
+        },
+      });
+
+      await ctx.reply("✅ Xabar yuborildi.");
+    } catch (error) {
+      console.error("Failed to send message:", error);
+      await ctx.reply("❌ Xabar yuborishda xatolik yuz berdi.");
+    }
+
+    ctx.session.replyingToFeedback = null;
+    return;
   }
 };

@@ -39,6 +39,11 @@ export const callbackQuery = async (ctx: MyContext) => {
       }
     );
   }
+  if (data.startsWith("reply_feedback")) {
+    let userId = data.split(":")[1].trim();
+    await ctx.reply("📝 Xabaringizni yozing: ");
+    return (ctx.session.replyingToFeedback = userId);
+  }
   if (data.startsWith("cancel_payment")) {
     let user = data.split(" ")[1].trim();
     console.log("user", user, "user");

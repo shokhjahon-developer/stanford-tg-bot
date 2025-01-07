@@ -12,6 +12,7 @@ interface SessionData {
   isPaymentMadeProcess: boolean;
   payingPerson: string;
   hasGroupNumber: boolean;
+  replyingToFeedback: string | null;
 }
 
 export type MyContext = Context &
