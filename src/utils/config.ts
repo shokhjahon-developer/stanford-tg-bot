@@ -7,7 +7,6 @@ export const env = zennv({
     BOT_TOKEN: z.string(),
     CHANNEL_ID: z.string(),
     ADMIN_CHAT_ID: z.string(),
-    GRAFANA_URL: z.string(),
     BOT_ADMIN_ID: z.string(),
     ADMIN_CHAT_ID2: z.string(),
     DATABASE_PASS: z.string(),
