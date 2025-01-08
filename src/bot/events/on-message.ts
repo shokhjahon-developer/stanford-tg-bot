@@ -183,7 +183,7 @@ export const onMessage = async (ctx: MyContext) => {
         .update(Student)
         .set({ groupNumber: message.text })
         .where(eq(Student.chatId, `${ctx.chat?.id}`));
-      ctx.session.hasGroupNumber = true;
+      ctx.session.hasGroupNumber = false;
       return await ctx.reply(
         "💰 <b>O'quv kursiga to'lov</b>\n\n" +
           "📋 <i>To'lovni amalga oshirish uchun quyidagi raqamga pul o'tkazing:</i>\n\n" +
