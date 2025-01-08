@@ -38,7 +38,7 @@ export const PhoneNumberMiddleware = async (
       👤 <b>Telegram ismi:</b> ${updateCus!.tg_first_name}\n
       📱 <b>Telefon raqami:</b> +${updateCus!.phoneNumber}\n
       🆔 <b>Chat ID:</b> ${ctx.chatId}\n
-      📝 <b>Username:</b> @${updateCus!.username}\n
+      📝 <b>Username:</b> @${username}\n
       `,
       {
         parse_mode: "HTML",
@@ -52,7 +52,7 @@ export const PhoneNumberMiddleware = async (
       👤 <b>Familyasi:</b> ${updateCus!.lastName}\n
       👤 <b>Telegram ismi:</b> ${updateCus!.tg_first_name}\n
       📱 <b>Telefon raqami:</b> +${updateCus!.phoneNumber}\n
-      📝 <b>Username:</b> @${updateCus!.username}\n
+      📝 <b>Username:</b> @${username}\n
       `,
       {
         parse_mode: "HTML",
