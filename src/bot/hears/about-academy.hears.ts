@@ -66,7 +66,7 @@ export const contactSupport: HearTypeFunction = () => {
 
 export const offer: HearTypeFunction = () => {
   return {
-    title: "📩  Shikoyat  |  Talab  |  Taklif  🗣️",
+    title: "📩 Shikoyat | Talab | Taklif 🗣️",
     fn: async (ctx: MyContext) => {
       await ctx.reply(
         "<b>✨ Hurmatli foydalanuvchi! ✨</b>\n\n" +
@@ -80,7 +80,7 @@ export const offer: HearTypeFunction = () => {
       return (ctx.session.isFeedback = true);
     },
   };
-}; 
+};
 
 export const offerToBot: HearTypeFunction = () => {
   return {

@@ -243,6 +243,26 @@ export const onMessage = async (ctx: MyContext) => {
         },
       });
 
+      const adminText = `${text}\n\n\n   <b>✉️ Javob yuboruvchi ismi:</b> ${
+        ctx.from!.first_name
+      }\n
+   <b>✉️ Javob yuboruvchi username:</b> ${ctx.from!.username}\n
+   <b>✉️ Javob yuboruvchi chatId:</b> ${ctx.from!.id}\n
+      `;
+      await ctx.api.sendMessage(adminId2, adminText, {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "🔄 Javob berish",
+                callback_data: `reply_feedback:${ctx.from!.id}`,
+              },
+            ],
+          ],
+        },
+      });
+
       await ctx.reply("✅ Xabar yuborildi.");
     } catch (error) {
       console.error("Failed to send message:", error);

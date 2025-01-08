@@ -7,19 +7,19 @@ import { Student } from "../../database/schemas";
 
 export async function greeting(conversation: MyConversation, ctx: MyContext) {
   if (!ctx.session.student?.phoneNumber) {
-    await ctx.replyWithPhoto(
-      "AgACAgIAAxkDAAMCZ3FRXMDjyYDeW2MLyvNIhIOrlOUAAnL1MRsuFJFLe_9vxD3vt54BAAMCAAN4AAM2BA",
-      {
-        caption:
-          `🌟 Assalomu alaykum, ${ctx.from?.first_name}! 👋\n\n` +
-          `📚 Stanford O'quv Markazining rasmiy botiga xush kelibsiz! 🎓\n\n` +
-          `🚀 Bu yerda siz:\n\n` +
-          `- 📖 Yangi bilimlarni ortirishingiz,\n` +
-          `- ✅ Testlardan muvaffaqiyatli o‘tishingiz,\n` +
-          `- 📰 So‘nggi yangiliklardan xabardor bo‘lishingiz mumkin.\n\n` +
-          `🔔 Boshlash uchun, iltimos, ro‘yxatdan o‘ting! 📋`,
-      }
-    );
+    // await ctx.replyWithPhoto(
+    //   "AgACAgIAAxkDAAMCZ3FRXMDjyYDeW2MLyvNIhIOrlOUAAnL1MRsuFJFLe_9vxD3vt54BAAMCAAN4AAM2BA",
+    //   {
+    //     caption:
+    //       `🌟 Assalomu alaykum, ${ctx.from?.first_name}! 👋\n\n` +
+    //       `📚 Stanford O'quv Markazining rasmiy botiga xush kelibsiz! 🎓\n\n` +
+    //       `🚀 Bu yerda siz:\n\n` +
+    //       `- 📖 Yangi bilimlarni ortirishingiz,\n` +
+    //       `- ✅ Testlardan muvaffaqiyatli o‘tishingiz,\n` +
+    //       `- 📰 So‘nggi yangiliklardan xabardor bo‘lishingiz mumkin.\n\n` +
+    //       `🔔 Boshlash uchun, iltimos, ro‘yxatdan o‘ting! 📋`,
+    //   }
+    // );
 
     await ctx.reply("Iltimos, ismingizni kiriting! 📝");
 
