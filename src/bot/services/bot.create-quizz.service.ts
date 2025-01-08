@@ -1,6 +1,4 @@
-import { eq } from "drizzle-orm";
-
-import { type MyConversation, waitForValidName } from "./bot.service";
+import { type MyConversation } from "./bot.service";
 import type { MyContext } from "./context.service";
 import { createAdminMainMenuKeyboard } from "./commands.service";
 import { db } from "../../database";

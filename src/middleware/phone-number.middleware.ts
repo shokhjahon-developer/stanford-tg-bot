@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { Keyboard, NextFunction } from "grammy";
+import { NextFunction } from "grammy";
 
 import { Student, type StudentType } from "../database/schemas";
 import { db } from "../database";
@@ -26,6 +26,9 @@ export const PhoneNumberMiddleware = async (
       .then(GetFirstElement);
 
     ctx.session.student = updateCus;
+
+    let username = ctx.from?.username ? ctx.from?.username : null;
+    username = username ? `@${username}` : "N/A";
     await ctx.api.sendMessage(
       env.ADMIN_CHAT_ID2,
       `🌟 <b>Yangi foydalanuvchi:</b>\n\n` +
