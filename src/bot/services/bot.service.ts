@@ -9,6 +9,7 @@ import { db } from "../../database";
 import { Student } from "../../database/schemas";
 import type { HearTypeFunction } from "../hears/types";
 import { parse } from "path";
+import { env } from "../../utils/config";
 
 export type MyConversation = Conversation<MyContext>;
 
@@ -73,7 +74,7 @@ export const sendCourseRegistration = async (
   username = username ? `@${username}` : "N/A";
 
   await ctx.api.sendMessage(
-    process.env.ADMIN_CHAT_ID as string,
+    env.ADMIN_CHAT_ID as string,
     `🌟 <b>Yangi kursga yozilmoqchi bo'lgan foydalanuvchi:</b>\n\n` +
       `📚 <b>Qiziqish:</b> ${language} \n\n` +
       `👤 <b>Foydalanuvchi haqida ma'lumotlar:</b>\n\n` +
@@ -98,7 +99,7 @@ export const sendCourseRegistration = async (
     }
   );
   await ctx.api.sendMessage(
-    process.env.DATABASE_ID as string,
+    env.ADMIN_CHAT_ID2 as string,
     `🌟 <b>Yangi kursga yozilmoqchi bo'lgan foydalanuvchi:</b>\n\n` +
       `📚 <b>Qiziqish:</b> ${language} \n\n` +
       `👤 <b>Foydalanuvchi haqida ma'lumotlar:</b>\n\n` +

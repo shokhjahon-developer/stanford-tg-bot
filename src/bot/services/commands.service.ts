@@ -12,7 +12,7 @@ export const createMainMenuKeyboard = () => {
     .text("ℹ️ Biz haqimizda 🏢")
     .text("📞 Biz bilan bog'lanish 📲")
     .row()
-    .text("📩  Shikoyat  |  Talab  |  Taklif  🗣️")
+    .text("📩 Shikoyat | Talab | Taklif 🗣️")
     .text("🛠️ Botdagi Muammo yoki Taklif 💡")
     .row()
     .text("💳 O'quv kursiga to'lov qilish 💼");

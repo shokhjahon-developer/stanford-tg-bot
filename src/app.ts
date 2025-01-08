@@ -15,15 +15,16 @@ import { RegisterCustomer } from "./middleware/register-student";
 import { answerCallbackQuery } from "./bot/events/answer-callbackquery";
 import { PhoneNumberMiddleware } from "./middleware/phone-number.middleware";
 import { creatingPollQuizzes } from "./bot/services/bot.create-quizz.service";
+import { env } from "./utils/config";
 
 const redis = new Redis({
   host: "localhost",
   port: 6379,
 });
-export const adminId = +process.env.ADMIN_CHAT_ID!;
-export const adminId2 = +process.env.DATABASE_ID!;
+export const adminId = +env.ADMIN_CHAT_ID;
+export const adminId2 = +env.ADMIN_CHAT_ID2;
 
-export const bot = new Bot<MyContext>(process.env.BOT_TOKEN as string);
+export const bot = new Bot<MyContext>(env.BOT_TOKEN);
 
 bot.use(
   session({
@@ -93,6 +94,7 @@ bot.on("message", async (ctx) => {
 (async function bootstrap() {
   await migrateDatabase();
   bot.start();
+  // logger.info("Bot is running");
   console.log("Bot is running");
 })();
 

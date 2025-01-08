@@ -5,6 +5,8 @@ import { Student, type StudentType } from "../database/schemas";
 import { db } from "../database";
 import type { MyContext } from "../bot/services/context.service";
 import { createMainMenuKeyboard } from "../bot/services/commands.service";
+import { env } from "../utils/config";
+import { GetFirstElement } from "../database/helpers";
 
 export const PhoneNumberMiddleware = async (
   ctx: MyContext,
@@ -20,19 +22,34 @@ export const PhoneNumberMiddleware = async (
         phoneNumber: ctx.message.contact.phone_number,
       })
       .where(eq(Student.chatId, `${ctx.chatId}`))
-      .returning();
+      .returning()
+      .then(GetFirstElement);
 
-    ctx.session.student = updateCus[0];
+    ctx.session.student = updateCus;
     await ctx.api.sendMessage(
-      process.env.DATABASE_ID!,
+      env.ADMIN_CHAT_ID2,
       `🌟 <b>Yangi foydalanuvchi:</b>\n\n` +
         `
-      👤 <b>Ismi:</b> ${cus.firstName}\n
-      👤 <b>Familyasi:</b> ${cus.lastName}\n
-      👤 <b>Telegram ismi:</b> ${cus.tg_first_name}\n
-      📱 <b>Telefon raqami:</b> +${ctx.message.contact.phone_number}\n
+      👤 <b>Ismi:</b> ${updateCus!.firstName}\n
+      👤 <b>Familyasi:</b> ${updateCus!.lastName}\n
+      👤 <b>Telegram ismi:</b> ${updateCus!.tg_first_name}\n
+      📱 <b>Telefon raqami:</b> +${updateCus!.phoneNumber}\n
       🆔 <b>Chat ID:</b> ${ctx.chatId}\n
-      📝 <b>Username:</b> @${cus.username}\n
+      📝 <b>Username:</b> @${updateCus!.username}\n
+      `,
+      {
+        parse_mode: "HTML",
+      }
+    );
+    await ctx.api.sendMessage(
+      env.ADMIN_CHAT_ID,
+      `🌟 <b>Yangi foydalanuvchi:</b>\n\n` +
+        `
+      👤 <b>Ismi:</b> ${updateCus!.firstName}\n
+      👤 <b>Familyasi:</b> ${updateCus!.lastName}\n
+      👤 <b>Telegram ismi:</b> ${updateCus!.tg_first_name}\n
+      📱 <b>Telefon raqami:</b> +${updateCus!.phoneNumber}\n
+      📝 <b>Username:</b> @${updateCus!.username}\n
       `,
       {
         parse_mode: "HTML",

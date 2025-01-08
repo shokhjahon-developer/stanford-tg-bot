@@ -5,6 +5,7 @@ import type { MyContext } from "./context.service";
 import { createAdminMainMenuKeyboard } from "./commands.service";
 import { db } from "../../database";
 import { Question, Student } from "../../database/schemas";
+import { env } from "../../utils/config";
 
 export async function creatingPollQuizzes(
   conversation: MyConversation,
@@ -234,7 +235,7 @@ export async function notifyUsers(ctx: MyContext, date: string) {
       { parse_mode: "Markdown" }
     );
   }
-  const channelId = process.env.CHANNEL_ID;
+  const channelId = env.CHANNEL_ID;
   return ctx.api.sendMessage(
     channelId!,
     `🚀 *Diqqat! Yangi musobaqa boshlandi!* 🎯\n\n🎉 *Bilimingizni sinovdan o'tkazing va g'alaba qozoning!* 🏆\n\n⏳ *Musobaqa yakunlanish vaqti:* 🕰️ *${date}* ⏰\n\n🔥 *Shoshiling! Vaqt sizni kutmaydi — g'oliblar safida bo'ling!* 🚀`,

@@ -3,13 +3,14 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 import * as schema from "./schemas";
+import { env } from "../utils/config";
 
 const pool = new Pool({
-  host: process.env.DATABASE_HOST,
-  port: +process.env.DATABASE_PORT!,
-  database: process.env.DATABASE_NAME,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASS,
+  host: env.DATABASE_HOST,
+  port: +env.DATABASE_PORT,
+  database: env.DATABASE_NAME,
+  user: env.DATABASE_USER,
+  password: env.DATABASE_PASS,
   ssl: false,
 });
 

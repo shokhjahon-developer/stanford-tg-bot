@@ -4,7 +4,7 @@ import { db } from "../../database";
 import { Student } from "../../database/schemas";
 import type { MyContext } from "../services/context.service";
 import { createMainMenuKeyboard } from "../services/commands.service";
-import type { session } from "grammy";
+import { env } from "../../utils/config";
 
 export const onMessage = async (ctx: MyContext) => {
   const message = ctx.message!;
@@ -88,7 +88,7 @@ export const onMessage = async (ctx: MyContext) => {
       return (ctx.session.isBotFeedback = false);
     }
     await ctx.api.sendMessage(
-      process.env.BOT_ADMIN_ID!,
+      env.ADMIN_CHAT_ID,
       `<b>📩 Botga yangi habar keldi:</b>\n\n ${message.text}\n\n\n` +
         `name: ${ctx.from!.first_name}\n` +
         `username: ${ctx.from?.username}\n` +

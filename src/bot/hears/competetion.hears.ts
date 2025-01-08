@@ -7,12 +7,13 @@ import type { HearTypeFunction } from "./types";
 import { desc, eq, gte } from "drizzle-orm";
 import { sendQuestionWithTimer } from "../services/bot.solve-quizz.service";
 import { sendLeaderboard } from "../services/bot.service";
+import { env } from "../../utils/config";
 
 export const CreateCompetition: HearTypeFunction = () => {
   return {
     title: "📝 Musobaqa yaratish 🏆",
     fn: async (ctx: MyContext) => {
-      if (ctx.from?.id !== adminId && ctx.from?.id !== adminId2) {
+      if (ctx.from?.id !== +adminId && ctx.from?.id !== +adminId2) {
         return await ctx.reply("Permission denied!!! 🚫");
       }
       const questions = await db.select().from(Question);
@@ -30,7 +31,7 @@ export const finishCompetition: HearTypeFunction = () => {
   return {
     title: "🏁 Musobaqani yakunlash 🏁",
     fn: async (ctx: MyContext) => {
-      if (ctx.from?.id !== adminId && ctx.from?.id !== adminId2) {
+      if (ctx.from?.id !== +adminId && ctx.from?.id !== +adminId2) {
         return await ctx.reply("Permission denied!!! 🚫");
       }
       const questions = await db.select().from(Question);
@@ -66,7 +67,7 @@ export const finishCompetition: HearTypeFunction = () => {
         } ball</b>\n`;
       });
 
-      const channelId = process.env.CHANNEL_ID;
+      const channelId = env.CHANNEL_ID;
       await ctx.api.sendMessage(channelId!, message, {
         parse_mode: "HTML",
         reply_markup: {
@@ -121,7 +122,7 @@ export const cancelCompetition: HearTypeFunction = () => {
   return {
     title: "🚫 Musobaqani bekor qilish 🚫",
     fn: async (ctx: MyContext) => {
-      if (ctx.from?.id !== adminId && ctx.from?.id !== adminId2) {
+      if (ctx.from?.id !== +adminId && ctx.from?.id !== +adminId2) {
         return await ctx.reply("Permission denied!!! 🚫");
       }
       const questions = await db.select().from(Question);
