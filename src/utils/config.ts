@@ -6,6 +6,8 @@ export const env = zennv({
   schema: z.object({
     BOT_TOKEN: z.string(),
     CHANNEL_ID: z.string(),
+    LOKI_URL: z.string(),
+    TRACER_URL: z.string(),
     ADMIN_CHAT_ID: z.string(),
     BOT_ADMIN_ID: z.string(),
     ADMIN_CHAT_ID2: z.string(),
