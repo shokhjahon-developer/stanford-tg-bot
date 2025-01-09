@@ -48,7 +48,7 @@ export const contactSupport: HearTypeFunction = () => {
             [
               {
                 text: "💬 Telegram orqali",
-                url: "https://t.me/shokhjahon_s",
+                url: "https://t.me/An_Nur_edu_admin",
               },
             ],
             [
