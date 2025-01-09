@@ -4,7 +4,7 @@ import * as competetions from "./competetion.hears";
 import * as courses from "./courses.hears";
 import * as admin from "./admin.hears";
 import * as aboutAcademy from "./about-academy.hears";
-import * as general from "./general.hears";
+import * as general from "./payment.hears";
 
 export const initHears = (bot: Bot<MyContext>) => {
   Object.values(competetions).forEach((item) => {

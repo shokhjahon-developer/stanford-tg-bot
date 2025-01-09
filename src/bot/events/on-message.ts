@@ -88,7 +88,7 @@ export const onMessage = async (ctx: MyContext) => {
       return (ctx.session.isBotFeedback = false);
     }
     await ctx.api.sendMessage(
-      env.ADMIN_CHAT_ID,
+      env.BOT_ADMIN_ID,
       `<b>📩 Botga yangi habar keldi:</b>\n\n ${message.text}\n\n\n` +
         `name: ${ctx.from!.first_name}\n` +
         `username: ${ctx.from?.username}\n` +
