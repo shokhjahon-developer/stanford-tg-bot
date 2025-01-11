@@ -1,5 +1,4 @@
-import { title } from "process";
-import { bot, adminId, adminId2 } from "../../app";
+import { adminId, adminId2 } from "../../app";
 import { db } from "../../database";
 import { Question, Student } from "../../database/schemas";
 import type { MyContext } from "../services/context.service";
